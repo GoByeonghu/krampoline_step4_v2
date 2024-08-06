@@ -20,13 +20,13 @@ spec:
             - name: TZ
               value: Asia/Seoul
             - name: MYSQL_ROOT_PASSWORD  # MARIADB_ROOT_PASSWORD -> MYSQL_ROOT_PASSWORD 변경
-              value: root
+              value: 1234
             - name: MYSQL_DATABASE  # MARIADB_DATABASE -> MYSQL_DATABASE 변경
-              value: krampoline
-            - name: MYSQL_USER  # 추가: MySQL 사용자 환경 변수
-              value: root
-            - name: MYSQL_PASSWORD  # 추가: MySQL 비밀번호 환경 변수
-              value: root
+              value: mungpy
+            # - name: MYSQL_USER  # 추가: MySQL 사용자 환경 변수
+            #   value: root
+            # - name: MYSQL_PASSWORD  # 추가: MySQL 비밀번호 환경 변수
+            #   value: root
             # MARIADB_DISABLE_UPGRADE_BACKUP 제거
           volumeMounts:
             - mountPath: /var/lib/mysql
