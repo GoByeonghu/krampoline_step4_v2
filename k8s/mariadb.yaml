@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: mysql  # mariadb -> mysql 변경
-          image: krmp-d2hub-idock.9rum.cc/dev-test/repo_1a62efa01271
+          image: krmp-d2hub-idock.9rum.cc/dev-test/repo_b66574f6fcd7
           env:
             - name: TZ
               value: Asia/Seoul
