@@ -2,30 +2,32 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: mariadb
+  name: mysql  # mariadb -> mysql 변경
 spec:
-  serviceName: mariadb
+  serviceName: mysql  # mariadb -> mysql 변경
   selector:
     matchLabels:
-      app: mariadb
+      app: mysql  # mariadb -> mysql 변경
   template:
     metadata:
       labels:
-        app: mariadb
+        app: mysql  # mariadb -> mysql 변경
     spec:
       containers:
-        - name: mariadb
-          # 여러분의 mariadb image 주소를 입력해주세요.
+        - name: mysql  # mariadb -> mysql 변경
           image: krmp-d2hub-idock.9rum.cc/dev-test/repo_1a62efa01271
           env:
             - name: TZ
               value: Asia/Seoul
-            - name: MARIADB_ROOT_PASSWORD
+            - name: MYSQL_ROOT_PASSWORD  # MARIADB_ROOT_PASSWORD -> MYSQL_ROOT_PASSWORD 변경
               value: root
-            - name: MARIADB_DATABASE
+            - name: MYSQL_DATABASE  # MARIADB_DATABASE -> MYSQL_DATABASE 변경
               value: krampoline
-            - name: MARIADB_DISABLE_UPGRADE_BACKUP
-              value: '1'
+            - name: MYSQL_USER  # 추가: MySQL 사용자 환경 변수
+              value: root
+            - name: MYSQL_PASSWORD  # 추가: MySQL 비밀번호 환경 변수
+              value: root
+            # MARIADB_DISABLE_UPGRADE_BACKUP 제거
           volumeMounts:
             - mountPath: /var/lib/mysql
               name: data
@@ -55,11 +57,77 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mariadb
+  name: mysql  # mariadb -> mysql 변경
 spec:
   type: ClusterIP
   clusterIP: None # Headless
   selector:
-    app: mariadb
+    app: mysql  # mariadb -> mysql 변경
   ports:
     - port: 3306
+
+# ---
+# apiVersion: apps/v1
+# kind: StatefulSet
+# metadata:
+#   name: mariadb
+# spec:
+#   serviceName: mariadb
+#   selector:
+#     matchLabels:
+#       app: mariadb
+#   template:
+#     metadata:
+#       labels:
+#         app: mariadb
+#     spec:
+#       containers:
+#         - name: mariadb
+#           # 여러분의 mariadb image 주소를 입력해주세요.
+#           image: krmp-d2hub-idock.9rum.cc/dev-test/repo_1a62efa01271
+#           env:
+#             - name: TZ
+#               value: Asia/Seoul
+#             - name: MARIADB_ROOT_PASSWORD
+#               value: root
+#             - name: MARIADB_DATABASE
+#               value: krampoline
+#             - name: MARIADB_DISABLE_UPGRADE_BACKUP
+#               value: '1'
+#           volumeMounts:
+#             - mountPath: /var/lib/mysql
+#               name: data
+#               subPath: mysql
+#             - mountPath: /docker-entrypoint-initdb.d
+#               name: init-db
+#           resources:
+#             limits:
+#               memory: 1Gi
+#           readinessProbe:
+#             tcpSocket:
+#               port: 3306
+#       volumes:
+#         - name: init-db
+#           configMap:
+#             name: init-db
+#   volumeClaimTemplates:
+#     - metadata:
+#         name: data
+#       spec:
+#         accessModes:
+#           - ReadWriteOnce
+#         resources:
+#           requests:
+#             storage: 1Gi
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: mariadb
+# spec:
+#   type: ClusterIP
+#   clusterIP: None # Headless
+#   selector:
+#     app: mariadb
+#   ports:
+#     - port: 3306
