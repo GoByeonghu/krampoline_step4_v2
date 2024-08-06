@@ -30,7 +30,7 @@ spec:
           readinessProbe:
             httpGet:
               # 해당 /api 가 안  뚫려있으면 Ready 가 안되요.
-              path: /api/hello
+              path: /hello
               port: 8080
       # volumes:
       #   - name: secret-volume
