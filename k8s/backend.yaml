@@ -15,7 +15,7 @@ spec:
       containers:
         - name: backend
           # 여러분의 backend image 주소를 입력해주세요.
-          image: krmp-d2hub-idock.9rum.cc/dev-test/repo_aba71ff421c9
+          image: krmp-d2hub-idock.9rum.cc/dev-test/repo_c91e7bf70a12
           env:
             - name: TZ
               value: Asia/Seoul
@@ -30,7 +30,7 @@ spec:
           readinessProbe:
             httpGet:
               # 해당 /api 가 안  뚫려있으면 Ready 가 안되요.
-              path: /api/test
+              path: /
               port: 8080
       volumes:
         - name: secret-volume
