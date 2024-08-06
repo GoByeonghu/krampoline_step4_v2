@@ -23,6 +23,8 @@ spec:
               value: '1234'
             - name: MYSQL_DATABASE  # MARIADB_DATABASE -> MYSQL_DATABASE 변경
               value: mungpy
+            - name: LANG
+              value: C.UTF-8
             # - name: MYSQL_USER  # 추가: MySQL 사용자 환경 변수
             #   value: root
             # - name: MYSQL_PASSWORD  # 추가: MySQL 비밀번호 환경 변수
