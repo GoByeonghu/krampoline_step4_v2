@@ -16,14 +16,14 @@ spec:
         - name: backend
           # 여러분의 backend image 주소를 입력해주세요.
           image: krmp-d2hub-idock.9rum.cc/dev-test/repo_fea190870665
-          env:
-            - name: TZ
-              value: Asia/Seoul
-            - name: DATABASE_URL
-              value: jdbc:mariadb://mariadb:3306/krampoline
-          volumeMounts:
-            - name: secret-volume
-              mountPath: /etc/secret
+          # env:
+          #   - name: TZ
+          #     value: Asia/Seoul
+          #   - name: DATABASE_URL
+          #     value: jdbc:mariadb://mariadb:3306/krampoline
+          # volumeMounts:
+          #   - name: secret-volume
+          #     mountPath: /etc/secret
           resources:
             requests:
               memory: 1Gi
@@ -32,10 +32,10 @@ spec:
               # 해당 /api 가 안  뚫려있으면 Ready 가 안되요.
               path: /
               port: 8080
-      volumes:
-        - name: secret-volume
-          secret:
-            secretName: my-secret-file
+      # volumes:
+      #   - name: secret-volume
+      #     secret:
+      #       secretName: my-secret-file
 ---
 apiVersion: v1
 kind: Service
